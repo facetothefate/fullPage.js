@@ -24,6 +24,7 @@
 			'slidesNavigation': false,
 			'slidesNavPosition': 'bottom',
 			'controlArrowColor': '#fff',
+			'noControlArrow':false,
 			'loopBottom': false,
 			'loopTop': false,
 			'loopHorizontal': true,
@@ -231,6 +232,10 @@
 					$(this).find('.fp-controlArrow.fp-next').css('border-color', 'transparent transparent transparent '+options.controlArrowColor);
 					$(this).find('.fp-controlArrow.fp-prev').css('border-color', 'transparent '+ options.controlArrowColor + ' transparent transparent');
 				}
+				
+				if(options.noControlArrow){
+					$(this).find('.fp-controlArrow').remove();
+				}
 
 				if(!options.loopHorizontal){
 					$(this).find('.fp-controlArrow.fp-prev').hide();
@@ -295,7 +300,7 @@
 			}
 
 			if(options.scrollOverflow){
-				if(document.readyState === "complete"){
+				if(container.hasClass('fullpage-used')){
 					createSlimScrollingHandler();
 				}
 				//after DOM and images are loaded
@@ -1642,6 +1647,9 @@
 
 			//scrolling the page to the top with no animation
 			$('html, body').scrollTop(0);
+
+			//to know if the plugin was already used in case it is used in a future again
+			container.addClass('fullpage-used');
 		}
 
 	};
